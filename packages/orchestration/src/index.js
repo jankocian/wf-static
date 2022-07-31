@@ -47,7 +47,7 @@ download({
 	],
 	replaceOrigin: destinationOrigin,
 	concurrency: 10,
-	dist: `../../public`,
+	dist: `../../../public`,
 	plugins: [
 		webflowPlugin(),
 	],
