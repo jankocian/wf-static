@@ -3,7 +3,7 @@ const webflowPlugin = require(`@app/webflow-plugin`)
 
 // Exit if environment variables are missing
 let siteUrl = process.env.WEBFLOW_URL
-let sitePath = process.env.PATH || ``
+let sitePath = process.env.URL_PATH || ``
 
 if (sitePath.endsWith(`/`)) {
   sitePath = sitePath.slice(0, -1)
@@ -47,9 +47,9 @@ if(process.env.BCP){
 download({
 	entry,
 	domains: [
-		{ domain: siteUrl.split(`://`)[1], path: `${sitePath}/` },
-		{ domain: `assets.website-files.com`, path: `${sitePath}/assets` },
-		{ domain: `uploads-ssl.webflow.com`, path: `${sitePath}/assets` },
+		{ domain: siteUrl.split(`://`)[1], path: sitePath + `/` },
+		{ domain: `assets.website-files.com`, path: sitePath + `/assets` },
+		{ domain: `uploads-ssl.webflow.com`, path: sitePath + `/assets` },
 	],
 	replaceOrigin: destinationOrigin,
 	concurrency: 10,
