@@ -2,7 +2,7 @@ const { resolve, URL } = require(`url`)
 const isRelative = require(`is-relative-url`)
 
 
-module.exports = function addToQueue(url, from){
+module.exports = function addToQueue(url, from = ``){
 	if(!url) return
 	const { queue, knownUrls } = this
 	if(url.indexOf(`//`) === 0){

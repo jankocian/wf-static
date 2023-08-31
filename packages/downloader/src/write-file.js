@@ -4,7 +4,12 @@ const { join, extname } = require(`path`)
 
 module.exports = async function writeFile(url, contents, ext){
 	console.log(`Writing URL:`, url)
-	const domainPath = this.findDomainPath(url)
+	let domainPath = this.findDomainPath(url)
+
+  if (process.env.PATH_NOT_FOLDER == `true` && process.env.URL_PATH) {
+    domainPath = domainPath.replaceAll(process.env.URL_PATH, ``)
+  }
+
 	if(!domainPath){
 		return
 	}
@@ -30,6 +35,8 @@ module.exports = async function writeFile(url, contents, ext){
 	await this.emit(`writeFile`, pluginObj)
 	outputPath = pluginObj.outputPath
 
+  console.log(`out`, url)
+  console.log(`out`, domainPath)
 
 
 	if(!contents){
