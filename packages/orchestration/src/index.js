@@ -49,6 +49,8 @@ download({
 	domains: [
 		{ domain: siteUrl.split(`://`)[1], path: sitePath + `/` },
 		{ domain: `assets.website-files.com`, path: sitePath + `/assets` },
+    { domain: `assets-global.website-files.com`, path: sitePath + `/assets` },
+		{ domain: `cdn.prod.website-files.com`, path: sitePath + `/assets` },
 		{ domain: `uploads-ssl.webflow.com`, path: sitePath + `/assets` },
 	],
 	replaceOrigin: destinationOrigin,
