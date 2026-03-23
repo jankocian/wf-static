@@ -13,6 +13,9 @@ if(process.env.BCP){
 module.exports = async function parseHtml(data, from){
 	const $ = cheerio.load(data, { decodeEntities: false })
 
+	// Remove integrity attributes (SRI hashes become invalid after scraping)
+	$(`[integrity]`).removeAttr(`integrity`).removeAttr(`crossorigin`)
+
 	for(let tag in linkEls){
 		const attr = linkEls[tag]
 
@@ -30,11 +33,6 @@ module.exports = async function parseHtml(data, from){
 				this.addToQueue(url, from)
 				const newUrl = this.convertUrl(url, true)
 				node.attr(attr, newUrl)
-				// Remove integrity and crossorigin attributes from link and script tags
-				if(tag === `link` || tag === `script`){
-					node.removeAttr(`integrity`)
-					node.removeAttr(`crossorigin`)
-				}
 			}
 		})
 
